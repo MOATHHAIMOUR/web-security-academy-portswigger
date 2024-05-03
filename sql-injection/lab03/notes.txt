@@ -1,0 +1,32 @@
+SQL injection vulnerability in the product category filter
+
+use a UNION attack to retrieve data from other tables
+
+goal is to determine the number of columns that are being returned by the query
+
+you should know UNION conditions:
+    - tables must have the same number of colums 
+    - tables must have the datatype
+
+
+way1:
+    determined the number of columns
+    try1
+    -select ? of table UNION Null
+    ->server error mean that the number of col are not equal 
+    try2
+    -select ? of table UNION Null Null
+    ->200 ok correct number of col 
+
+
+(cleaner)
+way2:
+    determined the number of columns
+    try1
+    -select ? of table order by 4
+    ->server error mean col is not exits 
+    try2
+    -select ? of table order by 3
+    ->200 ok correct col 3 exist
+
+
